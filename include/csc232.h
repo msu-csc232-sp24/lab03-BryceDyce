@@ -18,9 +18,9 @@
 #define TRUE 1
 #define EXECUTE_BLOCK FALSE
 
-#define FINISHED_PART_1 FALSE
-#define FINISHED_PART_2 FALSE
-#define FINISHED_PART_3 FALSE
+#define FINISHED_PART_1 TRUE
+#define FINISHED_PART_2 TRUE
+#define FINISHED_PART_3 TRUE
 
 #include <algorithm>
 #include <cassert>
@@ -55,24 +55,127 @@ using std::right;
 using std::setprecision;
 using std::setw;
 
+using std::string;
+
 /**
  * @brief Common namespace for CSC232 identifiers.
  */
 namespace csc232
 {
 #if FINISHED_PART_1
-    // TODO: Task 1 - Declare your Dog interface below (but before the #endif)
+    class Dog
+    {
+        public:
+            /**
+             * @brief Command this Dog to speak.
+             * @return A translation of what this Dog says in response.
+             */
+            virtual string speak() const = 0;
+
+            /**
+             * @brief Command this Dog to sit.
+             * @post  A message is inserted into the standard output stream.
+             */
+            virtual void sit() const = 0;
+
+            /**
+             * Virtual Dog destructor.
+             */
+            virtual ~Dog() = default;
+    };
+
+    
 
 #endif // FINISHED_PART_1
 
 #if FINISHED_PART_2
-    // TODO: Task 2.a.1 - Declare your Yorkie class for Task 2a below
+    class Yorkie : public Dog
+    {
+        public:
+            /**
+             * Creates new yorkie
+             */
+            Yorkie(const string& dogs_name);
 
-    // TODO: Task 2.a.2 - Add your Yorkie definition below
+            /**
+             * Command this Yorkie to speak
+             * @return A Translation of what this Yorkie says in response in all caps
+            */
+            string speak() const override;
 
-    // TODO: Task 2.b.1 - Declare your GreatDaehn class for Task 2b below
+            /**
+             * Command this Yorkie to sit
+             * @post A message is inserted into the standard output stream
+            */
+            void sit() const override;
 
-    // TODO: Task 2.b.2 - Add your GreatDaehn definition below (before the #endif)
+            /**
+             * Yorkie destructor
+            */
+            ~Yorkie() override = default;
+        private:
+            string name;
+    };
+
+    Yorkie::Yorkie(const string& dogs_name) : name{ dogs_name }
+    {
+        cout << "A Yorkie named " << name << " was just created." << endl;
+    }
+
+    string Yorkie::speak() const
+    {
+        string response{ "DID YOU SAY SPEAK?" };
+        return response;
+    }
+
+    void Yorkie::sit() const
+    {
+        cout << "A Yorkie named " << name << " just sat down." << endl;
+    }
+
+    class GreatDaehn : public Dog
+    {
+        public:
+            /**
+             * Creates new GreatDaehn
+             */
+            GreatDaehn(const string& dogs_name);
+
+            /**
+             * Commands this GreatDaehn to speak
+             * @return A translation of what this GreatDaehn says in response
+             */
+            string speak() const override;
+
+            /**
+             * Commands this GreatDaehn to sit
+             * @post A message is inserted into the standardoutput stream
+             */
+            void sit() const override;
+
+            /**
+             * GreatDaehn destructor
+             */
+            ~GreatDaehn() override = default;
+        private:
+            string name;
+    };
+
+    GreatDaehn::GreatDaehn(const string& dogs_name) : name{ dogs_name }
+    {
+        cout << "A GreatDaehn named " << name << " was just created." << endl;
+    }
+
+    string GreatDaehn::speak() const
+    {
+        string response{ "What?" };
+        return response;
+    }
+
+    void GreatDaehn::sit() const
+    {
+        cout << "A GreatDaehn named " << name << " just sat down." << endl;
+    }
 
 #endif // FINISHED_PART_2
 
